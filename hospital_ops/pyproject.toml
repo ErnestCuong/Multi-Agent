@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "hospital_ops"
+version = "0.1.0"
+description = "hospital_ops using crewAI"
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<=3.13"
+crewai = { extras = ["tools"], version = "^0.51.0" }
+
+[tool.poetry.scripts]
+hospital_ops = "hospital_ops.main:run"
+run_crew = "hospital_ops.main:run"
+train = "hospital_ops.main:train"
+replay = "hospital_ops.main:replay"
+test = "hospital_ops.main:test"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
