@@ -1,11 +1,9 @@
+import os
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 
-# Uncomment the following line to use an example of a custom tool
-# from hospital_ops.tools.custom_tool import MyCustomTool
-
-# Check our tools documentations for more information on how to use them
-# from crewai_tools import SerperDevTool
+from hospital_ops.tools.custom import list_hospitals_tool, get_hospital_path_tool
+from hospital_ops.tools.imported import read_file_tool
 
 @CrewBase
 class HospitalOpsCrew():
@@ -13,32 +11,28 @@ class HospitalOpsCrew():
 	agents_config = 'config/agents.yaml'
 	tasks_config = 'config/tasks.yaml'
 
+	os.environ["OPENAI_MODEL_NAME"]="gpt-4o"
+     
 	@agent
-	def researcher(self) -> Agent:
+	def senior_analyst(self) -> Agent:
 		return Agent(
-			config=self.agents_config['researcher'],
-			# tools=[MyCustomTool()], # Example of custom tool, loaded on the beginning of file
+			config=self.agents_config['senior_analyst'],
+			tools=[],
 			verbose=True
 		)
-
+  
 	@agent
-	def reporting_analyst(self) -> Agent:
+	def data_assistant(self) -> Agent:
 		return Agent(
-			config=self.agents_config['reporting_analyst'],
+			config=self.agents_config['data_assistant'],
+			tools=[list_hospitals_tool, get_hospital_path_tool, read_file_tool],
 			verbose=True
 		)
 
 	@task
-	def research_task(self) -> Task:
+	def analysing_hospital_operations_task(self) -> Task:
 		return Task(
-			config=self.tasks_config['research_task'],
-		)
-
-	@task
-	def reporting_task(self) -> Task:
-		return Task(
-			config=self.tasks_config['reporting_task'],
-			output_file='report.md'
+			config=self.tasks_config['analysing_hospital_operations_task'],
 		)
 
 	@crew

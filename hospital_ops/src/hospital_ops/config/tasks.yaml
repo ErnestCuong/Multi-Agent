@@ -1,17 +1,12 @@
-research_task:
+analysing_hospital_operations_task:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is 2024.
+    With only the available data, deeply analyse it. This is a Singapore public hospital.
+    Hospital knowledge should be extensively checked. 
+    The lower the repeated visits to first visits ratio the better.
+    Median wait time for outpatient should be less than 14 days.
+    Common knowledge should be considered to explain certain trends but only when they are important. 
+    Example of common knowledge is some months may experience lower demand due to holidays.
+    Most commonly known seasonal trends don't have to be commented on.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
-
-reporting_task:
-  description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
-  expected_output: >
-    A fully fledge reports with the mains topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    A list of notable findings that should be paid attention to.
+  agent: senior_analyst

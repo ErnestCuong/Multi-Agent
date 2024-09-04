@@ -1,0 +1,1 @@
+HOSPITAL_DATA_FOLDER_PATH = 'src/hospital_ops/data/hospitals/'
