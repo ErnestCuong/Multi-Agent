@@ -2,6 +2,7 @@ analysing_hospital_operations_task:
   description: >
     Your TASK is to deeply analyze the monthly data of hospitals and give insightful comments to senior management of hospital
     As this is presented monthly, the last month's data is new data.
+    MAKE use of your contextual knowledge.
     Analyze the hospitals separately, you not required to compare them.
     Format your answer according to the hospital names then the service settings.
   expected_output: >

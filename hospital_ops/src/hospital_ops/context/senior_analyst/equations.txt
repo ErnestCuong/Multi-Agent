@@ -1,0 +1,8 @@
+[EQUATIONS for OUTPATIENT SERVICE]
+Ratio of repeat visits to first visits = Total Repeat visits/Total First visits
+
+[EQUATIONS FOR EMERGENCY ROOM SERVICE]
+% of ED attendances admitted = Admitted as inpatients/Total ED attendances
+
+[EQUATIONS FOR INPATIENT SERVICE]
+Patient days = Number of discharges x ALOS x days in month
