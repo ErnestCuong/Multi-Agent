@@ -25,14 +25,22 @@ class HospitalOpsCrew():
 	def data_assistant(self) -> Agent:
 		return Agent(
 			config=self.agents_config['data_assistant'],
-			tools=[list_hospitals_tool, get_hospital_path_tool, read_file_tool],
+			tools=[],
 			verbose=True
 		)
-
+  
+	@task
+	def get_hospital_data_task(self) -> Task:
+		return Task(
+			config=self.tasks_config['get_hospital_data_task'],
+			tools=[list_hospitals_tool, get_hospital_path_tool, read_file_tool]
+		)
+  
 	@task
 	def analysing_hospital_operations_task(self) -> Task:
 		return Task(
 			config=self.tasks_config['analysing_hospital_operations_task'],
+			# context=[get_hospital_path_tool]
 		)
 
 	@crew

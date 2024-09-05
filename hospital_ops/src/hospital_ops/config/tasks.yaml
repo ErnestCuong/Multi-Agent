@@ -1,3 +1,10 @@
+get_hospital_data_task:
+  description: >
+    Your TASK is to get hospital data.
+  expected_output: >
+    Hospital data.
+  agent: data_assistant
+
 analysing_hospital_operations_task:
   description: >
     Your TASK is to deeply analyze the monthly data of hospitals and give insightful comments to senior management of hospital
