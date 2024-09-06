@@ -36,12 +36,12 @@ senior_analyst:
     Patient days = Number of discharges x ALOS x days in month
   max_iter: 8
 
-data_assistant:
-  role: >
-    {topic} Data Assistant
-  goal: >
-    Helps Senior Analyst find the required {topic} data and perform basic data analysis
-  backstory: >
-    You are knowledgeable about all the {topic} data. Sometimes you may need to break down the search task
-    given by the Senior Analyst into smaller search problems.
-  max_iter: 8
+# data_assistant:
+#   role: >
+#     {topic} Data Assistant
+#   goal: >
+#     Helps Senior Analyst find the required {topic} data and perform basic data analysis
+#   backstory: >
+#     You are knowledgeable about all the {topic} data. Sometimes you may need to break down the search task
+#     given by the Senior Analyst into smaller search problems.
+#   max_iter: 8

@@ -2,7 +2,7 @@ import os
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 
-from hospital_ops.tools.custom import list_hospitals_tool, get_hospital_path_tool, eda_tool
+from hospital_ops.tools.custom import list_hospitals_tool, get_hospital_path_tool, fetch_and_analyze_tool
 from hospital_ops.tools.imported import read_file_tool, rag_json_tool
 
 @CrewBase
@@ -17,24 +17,24 @@ class HospitalOpsCrew():
 	def senior_analyst(self) -> Agent:
 		return Agent(
 			config=self.agents_config['senior_analyst'],
-			tools=[],
+			tools=[list_hospitals_tool, get_hospital_path_tool, fetch_and_analyze_tool],
 			verbose=True
 		)
   
-	@agent
-	def data_assistant(self) -> Agent:
-		return Agent(
-			config=self.agents_config['data_assistant'],
-			tools=[rag_json_tool],
-			verbose=True
-		)
+	# @agent
+	# def data_assistant(self) -> Agent:
+	# 	return Agent(
+	# 		config=self.agents_config['data_assistant'],
+	# 		tools=[rag_json_tool],
+	# 		verbose=True
+	# 	)
 
-	@task
-	def exploring_hospital_data_task(self) -> Task:
-		return Task(
-			config=self.tasks_config['exploring_hospital_data_task'],
-			tools=[list_hospitals_tool, get_hospital_path_tool, eda_tool]
-		)
+	# @task
+	# def exploring_hospital_data_task(self) -> Task:
+	# 	return Task(
+	# 		config=self.tasks_config['exploring_hospital_data_task'],
+	# 		tools=[list_hospitals_tool, get_hospital_path_tool, eda_tool]
+	# 	)
   
 	@task
 	def analysing_hospital_operations_task(self) -> Task:

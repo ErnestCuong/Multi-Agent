@@ -1,9 +1,9 @@
-exploring_hospital_data_task:
-  description: >
-    Your TASK is to perform exploratory data analysis on hospital data. Perform this only once per hospital.
-  expected_output: >
-    Save a json file of your findings.
-  agent: senior_analyst
+# exploring_hospital_data_task:
+#   description: >
+#     Your TASK is to perform exploratory data analysis on hospital data. Perform this only once per hospital.
+#   expected_output: >
+#     Save a json file of your findings.
+#   agent: senior_analyst
 
 analysing_hospital_operations_task:
   description: >
