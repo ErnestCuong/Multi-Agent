@@ -2,8 +2,8 @@ import os
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 
-from hospital_ops.tools.custom import list_hospitals_tool, get_hospital_path_tool
-from hospital_ops.tools.imported import read_file_tool
+from hospital_ops.tools.custom import list_hospitals_tool, get_hospital_path_tool, eda_tool
+from hospital_ops.tools.imported import read_file_tool, rag_json_tool
 
 @CrewBase
 class HospitalOpsCrew():
@@ -25,10 +25,17 @@ class HospitalOpsCrew():
 	def data_assistant(self) -> Agent:
 		return Agent(
 			config=self.agents_config['data_assistant'],
-			tools=[list_hospitals_tool, get_hospital_path_tool, read_file_tool],
+			tools=[rag_json_tool],
 			verbose=True
 		)
 
+	@task
+	def exploring_hospital_data_task(self) -> Task:
+		return Task(
+			config=self.tasks_config['exploring_hospital_data_task'],
+			tools=[list_hospitals_tool, get_hospital_path_tool, eda_tool]
+		)
+  
 	@task
 	def analysing_hospital_operations_task(self) -> Task:
 		return Task(
