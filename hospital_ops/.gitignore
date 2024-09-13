@@ -4,3 +4,4 @@ db/
 **/data/
 **/poetry.lock
 **.temp.**
+**/comments/

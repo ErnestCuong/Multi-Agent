@@ -151,3 +151,13 @@ def fetch_and_observation_tool(path: str, num_of_months = 4):
 
     # Step 6: Return the report
     return new_df
+
+@tool("Save Comments Tool")
+def save_comments_tool(comments: str, name: str):
+    """
+    A tool to save comments in a txt file. 
+    :param comments: string, the comments you want to save.
+    :param name: string, the name of the saved file, format it like this '<hospital name>_comments.txt'.
+    """
+    with open("src/hospital_ops/comments/" + name, "w") as file:
+        file.write(comments)

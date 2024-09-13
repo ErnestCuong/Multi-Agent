@@ -2,7 +2,7 @@ import os
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 
-from hospital_ops.tools.custom import list_hospitals_tool, get_hospital_path_tool, fetch_and_observation_tool
+from hospital_ops.tools.custom import list_hospitals_tool, get_hospital_path_tool, fetch_and_observation_tool, save_comments_tool
 # from hospital_ops.tools.imported import read_file_tool, rag_json_tool
 
 @CrewBase
@@ -17,7 +17,7 @@ class HospitalOpsCrew():
 	def senior_analyst(self) -> Agent:
 		return Agent(
 			config=self.agents_config['senior_analyst'],
-			tools=[list_hospitals_tool, get_hospital_path_tool, fetch_and_observation_tool],
+			tools=[list_hospitals_tool, get_hospital_path_tool, fetch_and_observation_tool, save_comments_tool],
 			verbose=True
 		)
   
