@@ -1,15 +1,21 @@
-from hospital_ops.common.constants import HOSPITAL_DATA_FOLDER_PATH
+from hospital_ops.common.constants import (
+    HOSPITAL_DATA_FOLDER_PATH,
+    HOSPITAL_CRITERIA_PATH,
+)
 from hospital_ops.common.utils import (
     get_all_file_names,
     get_trend_analysis,
     get_variability_analysis,
+    get_latest_trend,
+    get_goal_analysis
 )
 
 from crewai_tools import tool
 
 import pandas as pd
+
 # from ydata_profiling import ProfileReport
-# import os
+import os
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
@@ -42,15 +48,17 @@ def list_hospitals_tool():
 
 
 @tool("Fetch-and-Observation Tool")
-def fetch_and_observation_tool(path: str, num_of_months = 4):
+def fetch_and_observation_tool(path: str, num_of_months=5):
     """A tool to fetch a hospital's data and perform simple data observations. Provide a single argument as the PATH to the hospital csv data file."""
     # Step 1: Load the dataset
     df = pd.read_csv(path)
+    df_for_targets = pd.read_csv(HOSPITAL_CRITERIA_PATH)
 
     # Step 2: Drop the two columns you don't want to analyze
-    non_time_columns = ["Setting", "Measure"]
-    df_filtered = df.drop(columns=non_time_columns)
-
+    non_use_columns = ["Setting", "Measure"]
+    df_filtered = df.drop(columns=non_use_columns)
+    df_for_targets = df_for_targets.drop(columns=non_use_columns)
+    
     # Step 4: List of month names (column names)
     months = df_filtered.columns.tolist()[-num_of_months:]
 
@@ -59,7 +67,8 @@ def fetch_and_observation_tool(path: str, num_of_months = 4):
 
     for index, row in df_filtered.iterrows():
         row_values = row.values[-num_of_months:]  # Get the row as an array of values
-
+        target_pair = df_for_targets.iloc[index]
+        
         # Linear Regression (Trend)
         X = np.arange(len(row_values)).reshape(
             -1, 1
@@ -86,14 +95,20 @@ def fetch_and_observation_tool(path: str, num_of_months = 4):
 
         # Variability (Standard Deviation) of Residuals (Against the Trend)
         std_dev_against_trend = np.std(residuals)
-        
+
+        # Mean
+        mean = np.mean(y_clean)
+
+        # Std
+        std = np.std(y_clean)
+
         # Min, Max, and their corresponding months
         min_value = np.min(y_clean)
         min_when = months[np.argmin(y_clean)]  # Corresponding month for min value
 
         max_value = np.max(y_clean)
         max_when = months[np.argmax(y_clean)]  # Corresponding month for max value
-        
+
         # # Check and remove anomaly
         # mask = (abs(residuals) < 1.5 * std_dev_against_trend)
         # anomalies = X_clean[~mask]
@@ -101,7 +116,7 @@ def fetch_and_observation_tool(path: str, num_of_months = 4):
         #     print('ANOMALY DETECTED')
         #     X_clean = X_clean[mask]
         #     y_clean = y_clean[mask]
-            
+
         #     # Perform linear regression again
         #     model = LinearRegression()
         #     model.fit(X_clean, y_clean)
@@ -115,7 +130,6 @@ def fetch_and_observation_tool(path: str, num_of_months = 4):
 
         #     # Variability (Standard Deviation) of Residuals (Against the Trend)
         #     std_dev_against_trend = np.std(residuals)
-        
 
         # Determine trend
         trend = get_trend_analysis(slope, min_value)
@@ -123,6 +137,12 @@ def fetch_and_observation_tool(path: str, num_of_months = 4):
         # Determine variability
         variability = get_variability_analysis(std_dev_against_trend, min_value)
 
+        # Get latest trend
+        latest_trend = get_latest_trend(y_clean)
+
+        # Analyze against hospital targets
+        goal_analysis = get_goal_analysis(months, y_clean, target_pair)
+        
         # Store the results for the current row
         results.append(
             {
@@ -132,18 +152,26 @@ def fetch_and_observation_tool(path: str, num_of_months = 4):
                 "Min When": min_when,
                 "Max Value": max_value,
                 "Max When": max_when,
+                "Mean": mean,
+                "Standard Deviation": std,
+                "Latest Trend": latest_trend,
+                "Goal Analysis": goal_analysis
                 # "Anomalies": [months[anomaly[0]] for anomaly in anomalies]
             }
         )
 
     # Step 5: Create a new dataset report
-    new_df = df[non_time_columns]
-    new_df["Trend"] = [item["Trend"] for item in results]
-    new_df["Variability"] = [item["Variability"] for item in results]
-    new_df["Min Value"] = [item["Min Value"] for item in results]
+    new_df = df[non_use_columns]
+    new_df["Overall Trend"] = [item["Trend"] for item in results]
+    new_df["Variability Along Trend"] = [item["Variability"] for item in results]
+    # new_df["Min Value"] = [item["Min Value"] for item in results]
     new_df["Min When"] = [item["Min When"] for item in results]
-    new_df["Max Value"] = [item["Max Value"] for item in results]
+    # new_df["Max Value"] = [item["Max Value"] for item in results]
     new_df["Max When"] = [item["Max When"] for item in results]
+    # new_df["Mean"] = [item["Mean"] for item in results]
+    # new_df["Standard Deviation"] = [item["Standard Deviation"] for item in results]
+    new_df["Latest Trend"] = [item["Latest Trend"] for item in results]
+    new_df["Goal Analysis"] = [item["Goal Analysis"] for item in results]
     # new_df["Anomalies"] = [item["Anomalies"] for item in results]
 
     # Save the report
@@ -152,12 +180,18 @@ def fetch_and_observation_tool(path: str, num_of_months = 4):
     # Step 6: Return the report
     return new_df
 
+
 @tool("Save Comments Tool")
 def save_comments_tool(comments: str, name: str):
     """
-    A tool to save comments in a txt file. 
+    A tool to save comments in a txt file.
     :param comments: string, the comments you want to save.
-    :param name: string, the name of the saved file, format it like this '<hospital name>_comments.txt'.
+    :param name: string, the name of the saved file, format it this way '<hospital_name>_comments.txt'.
     """
-    with open("src/hospital_ops/comments/" + name, "w") as file:
+    folder_path = "src/hospital_ops/comments/"
+    if not os.path.exists(folder_path):
+        # Create the folder
+        os.makedirs(folder_path)
+    with open(folder_path + name, "w") as file:
         file.write(comments)
+        return "Comments saved successfully"
