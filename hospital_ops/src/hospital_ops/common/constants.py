@@ -1,15 +1,18 @@
 from enum import Enum
 HOSPITAL_DATA_FOLDER_PATH = 'src/hospital_ops/data/hospitals/'
-HOSPITAL_CRITERIA_PATH = 'src/hospital_ops/data/hospitals/criteria.csv'
+HOSPITAL_REPORT_FOLDER_PATH = 'src/hospital_ops/data/reports/'
+HOSPITAL_CRITERIA_PATH = 'src/hospital_ops/data/criteria.csv'
 
 THRESHOLD_SLOPE_TO_MIN_RATIO = 0.01
 THRESHOLD_RES_STD_TO_MIN_RATIO = 0.01
 class Trend(Enum):
     INCREASING = 'Increasing'
-    INCREASING_SLIGHTLY = 'Increasing Slightly'
+    GENERALLY_INCREASING = 'Generally Increasing'
     CONSTANT = 'Constant'
-    DECREASING_SLIGHTLY = 'Decreasing Slightly'
+    GENERALLY_CONSTANT = 'Generally Constant'
     DECREASING = 'Decreasing'
+    GENERALLY_DECREASING = 'Generally Decreasing'
+    FLUCTUATING = 'Fluctuating'
         
 class Variability(Enum):
     FLUCTUATING = 'Fluctuating'

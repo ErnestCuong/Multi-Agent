@@ -1,17 +1,25 @@
-# exploring_hospital_data_task:
-#   description: >
-#     Your TASK is to perform exploratory data analysis on hospital data. Perform this only once per hospital.
-#   expected_output: >
-#     Save a json file of your findings.
-#   agent: senior_analyst
+exploring_hospital_data_task:
+  description: >
+    Your TASK is to perform exploratory data analysis on hospital data. Perform this only once per hospital.
+  expected_output: >
+    Fetch and explore data.
+  agent: junior_analyst
 
 analysing_hospital_operations_task:
   description: >
-    Your TASK is to deeply analyze the monthly data of hospitals from January to May and give insightful comments to senior management of hospital.
+    Your TASK is to deeply analyze the monthly data of hospitals from February to May and give insightful comments to senior management of hospital.
+    Make a comment on every single row of data.
     Analyze the hospitals separately, you not required to compare them.
-    You can find observations first, then deeply analyze the observations after that.
     Format your answer according to the hospital names then the service settings.
+    You should not perform any mathematical calculation on your own.
+    If R-squared value is low, there is no clear trend.
+    If slope is small relative to February data, then there is no increasing or decreasing trend.
+    You should cross check the trends and variations between the Last-4-Month and Last-6-Month, if they generally agree, great, if not, comment on the Last-4-Month data with reservation.
+    Do not mention any data point before February 
+    Do not mention any Last-6-Month data, only use them to verify your Last-4-Month data.
     Save your comments to a text file.
   expected_output: >
-    A list of notable findings on the hospital data.
+    Saving a text file with the list of findings on the hospital data.
   agent: senior_analyst
+
+# summarize_hospital_operations_task:
