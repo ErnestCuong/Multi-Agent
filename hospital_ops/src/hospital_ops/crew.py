@@ -2,7 +2,7 @@ import os
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 
-from hospital_ops.tools.custom import get_observation_tool, list_hospitals_tool, get_hospital_path_tool, fetch_and_observation_tool, save_comments_tool
+from hospital_ops.tools.custom import get_generated_comments_tool, get_gold_standard_comments_tool, get_observation_tool, list_hospitals_tool, get_hospital_path_tool, fetch_and_observation_tool, save_comments_tool, save_test_result_tool
 # from hospital_ops.tools.imported import read_file_tool, rag_json_tool
 
 @CrewBase
@@ -29,6 +29,14 @@ class HospitalOpsCrew():
 			verbose=True
 		)
   
+	@agent
+	def audit_person(self) -> Agent:
+		return Agent(
+			config=self.agents_config['audit_person'],
+			tools=[list_hospitals_tool, get_gold_standard_comments_tool, get_generated_comments_tool, save_test_result_tool],
+			verbose=True
+		)
+  
 	# @agent
 	# def data_assistant(self) -> Agent:
 	# 	return Agent(
@@ -37,17 +45,23 @@ class HospitalOpsCrew():
 	# 		verbose=True
 	# 	)
 
-	@task
-	def exploring_hospital_data_task(self) -> Task:
-		return Task(
-			config=self.tasks_config['exploring_hospital_data_task'],
-			# tools=[list_hospitals_tool, get_hospital_path_tool, fetch_and_observation_tool]
-		)
+	# @task
+	# def exploring_hospital_data_task(self) -> Task:
+	# 	return Task(
+	# 		config=self.tasks_config['exploring_hospital_data_task'],
+	# 		# tools=[list_hospitals_tool, get_hospital_path_tool, fetch_and_observation_tool]
+	# 	)
+  
+	# @task
+	# def analysing_hospital_operations_task(self) -> Task:
+	# 	return Task(
+	# 		config=self.tasks_config['analysing_hospital_operations_task'],
+	# 	)
   
 	@task
-	def analysing_hospital_operations_task(self) -> Task:
+	def verify_hospital_comments(self) -> Task:
 		return Task(
-			config=self.tasks_config['analysing_hospital_operations_task'],
+			config=self.tasks_config['verify_hospital_comments'],
 		)
 
 	@crew

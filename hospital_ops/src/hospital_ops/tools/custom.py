@@ -1,12 +1,13 @@
+import json
 from hospital_ops.common.constants import (
     HOSPITAL_DATA_FOLDER_PATH,
     HOSPITAL_CRITERIA_PATH,
+    HOSPITAL_GENERATED_COMMENTS_FOLDER_PATH,
+    HOSPITAL_GOLD_COMMENTS_FOLDER_PATH,
     HOSPITAL_REPORT_FOLDER_PATH,
 )
 from hospital_ops.common.utils import (
     get_all_file_names,
-    get_trend_analysis,
-    get_variability_analysis,
     get_goal_analysis,
 )
 
@@ -18,6 +19,7 @@ import os
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
+import csv
 
 
 @tool("Get Hospital Data File Path Tool")
@@ -92,12 +94,6 @@ def fetch_and_observation_tool(path: str):
         # Calculate R-squared
         r_squared = round(model.score(X_clean, y_clean), 2)
 
-        # # Analyse trend
-        # trend = get_trend_analysis(slope, initial_value, r_squared)
-
-        # # Analyse variability
-        # variability = get_variability_analysis(r_squared)
-
         # Analyze against hospital targets
         goal_analysis = get_goal_analysis(months, y_clean, target_pair)
 
@@ -155,12 +151,6 @@ def fetch_and_observation_tool(path: str):
         # Calculate R-squared
         r_squared = round(model.score(X_clean, y_clean),2)
 
-        # # Analyse trend
-        # trend = get_trend_analysis(slope, initial_value)
-
-        # # Analyse variability
-        # variability = get_variability_analysis(r_squared)
-
         # Store the results for the current row
         results.append(
             {
@@ -191,12 +181,47 @@ def save_comments_tool(comments: str, name: str):
     """
     A tool to save comments in a txt file.
     :param comments: string, the comments you want to save.
-    :param name: string, the name of the saved file, format it this way '<hospital_name>_comments.txt'.
+    :param name: string, the name of the hospital, example: 'A'.
     """
     folder_path = "src/hospital_ops/comments/"
     if not os.path.exists(folder_path):
         # Create the folder
         os.makedirs(folder_path)
-    with open(folder_path + name, "w") as file:
+    with open(folder_path + name + '.txt', "w") as file:
         file.write(comments)
         return "Comments saved successfully"
+
+@tool("Save Test Result Tool")
+def save_test_result_tool(result: str, name: str):
+    """
+    A tool to save test result in a csv file.
+    :param result: string, the result which is a json string of an array of rows in a csv format where first row is column names
+    :param name: string, the hospital name like 'A'
+    """
+    folder_path = "src/hospital_ops/tests/"
+    if not os.path.exists(folder_path):
+        # Create the folder
+        os.makedirs(folder_path)
+    with open(folder_path + name + '.csv', "w") as file:
+        writer = csv.writer(file)
+        # Writing each row
+        writer.writerows(json.loads(result))
+        return "Test Result saved successfully"
+    
+@tool("Get Gold Standard Comments Tool")
+def get_gold_standard_comments_tool(name: str):
+    """
+    A tool to retrieve the gold standard comments.
+    :param name: string, the name of the hospital, example: 'A'.
+    """
+    with open(HOSPITAL_GOLD_COMMENTS_FOLDER_PATH + name + '.txt', "r") as file:
+        return file.read()
+    
+@tool("Get Generated Comments Tool")
+def get_generated_comments_tool(name: str):
+    """
+    A tool to retrieve the generated comments.
+    :param name: string, the name of the hospital, example: 'A'.
+    """
+    with open(HOSPITAL_GENERATED_COMMENTS_FOLDER_PATH + name + '.txt', "r") as file:
+        return file.read()
