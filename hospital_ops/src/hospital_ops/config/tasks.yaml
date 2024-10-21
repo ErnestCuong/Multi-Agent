@@ -10,14 +10,25 @@ analysing_hospital_operations_task:
     Your TASK is to deeply analyze the monthly data of hospitals from February to May and give insightful comments to senior management of hospital.
     Make a comment on every single row of data.
     Analyze the hospitals separately, you not required to compare them.
-    Format your answer according to the hospital names then the service settings.
-    You should not perform any mathematical calculation on your own.
-    If R-squared value is low, there is no clear trend.
+    For each row of data that you analyse, prefix the comment for the row with the setting.
+    For each row, state the stats before stating your comments, then optionally state your explanation, 
+    example: "Outpatient, first visit median lead time with a small slope of 1.0 but R_squared of 0.2 and so it is highly fluctuating with no clear trend. The last month May was the highest in the last 4 months at 25.3 days. Could be due to fluctuating attendances but need to check how much of that fluctuation is about first visit."
+    You should not perform any mathematical calculation on your own, only use whatever stats that are present in the data provided.
+    If small slope and fluctuation, it means the value is constant around the mean.
+    If high slope or fluctutation, the mean is useless.
     If slope is small relative to February data, then there is no increasing or decreasing trend.
     You should cross check the trends and variations between the Last-4-Month and Last-6-Month, if they generally agree, great, if not, comment on the Last-4-Month data with reservation.
     Do not mention any data point before February 
     Do not say anything about the Last-6-Month data, only use them to verify your Last-4-Month data before your final comments to be saved.
-    Save your comments to a text file.
+    Then follow this additional thought process to enrich your response (ignore the points that are not applicable):
+    - (Outpatient, Attendances) If this increases while wait time increases, may be concerning.
+    - (Outpatient, RV:FV ratio) If new hospital, RV may take a while to increase so the initial low RV:FV ratio is nothing to talk about.
+    - (Outpatient, wait time) If it is already low, no need to worry about slight increase.
+    - (Emergency, Re-attendance rate within 30 days) The lower the better. Above 2% is a slight concern, above 3% is concerning.
+    - (Inpatient, % of discharges as Electives) Target 15%, if moving closer to the target, can get optimistic.
+    - (Inpatient, ALOS & BOR & Wait time & Beds) All three are related, so note for the change in one and see if the others change too.
+    - (Inpatient, MIC@ home) Increase is better, stagnant below 30 is not good. 
+    Finally, save your comments into a text file.
   expected_output: >
     Saving a text file with the list of findings on the hospital data.
   agent: senior_analyst

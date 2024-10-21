@@ -1,0 +1,8 @@
+Gold Standard Comment,Similar Generated Comment,Score
+SOC: Saw a slight decrease in RV:FV ratio,"Ratio of Repeat Visits to First Visits: The ratio has decreased from 4.2 in February to 3.9 in May, with a slope of -0.10. This might indicate improved effectiveness in handling first visits.",1
+SOC: FV appt wait time is ~40 days,"Waiting time to get First Visit Appointment (Median): The median wait time increased from 37 days in February to 42 days in May, which is above the ideal target of 14 days, suggesting room for improvement in appointment scheduling.",1
+Inpatient: Experienced higher BOR and bed wait time in May,"BOR (%): Bed Occupancy Rate increased from 92% in February to 98% in May, above the ideal 90%, indicating potential overcapacity issues.",1
+Inpatient: More discharges to CH,"% of discharges transferred to Community Hospital: Increased slightly from 7.0% in February to 7.4% in May, suggesting consistent community hospital utilization.",1
+Surgery: Saw an increase in Inpatient and Day Surgeries,"Inpatient Surgeries: Surgeries increased from 2275 in February to 2525 in May, matching the increase in outpatient first visits.",1
+Surgery: Time for Hip fracture surgery saw a new low,"Average Hip Fracture to Surgery time (hours): Decreased from 52 hours in February to 49 hours in May, below the 48-hour target, showing adherence to best practices.",1
+,,6/6

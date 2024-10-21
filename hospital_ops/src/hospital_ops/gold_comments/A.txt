@@ -1,13 +1,29 @@
-Hospital A Analysis
-
-SOC​
-- Saw a slight decrease in RV:FV ratio
-- FV appt wait time is ~40 days
-
-Inpatient​
-- Experienced higher BOR and bed wait time in May​
-- More discharges to CH​
-
-Surgery​
-- Saw an increase in Inpatient and Day Surgeries​
-- Time for Hip fracture surgery saw a new low​
+Outpatient, The number of rooms remain constant at 280 rooms
+Outpatient, The number of attendances slightly fluctuates around low to mid 50000s
+Outpatient, Saw a slight decrease in RV:FV ratio
+Outpatient, FV median wait time is around 42 days
+Outpatient, FV 95th percentile wait time is around 130 days
+Emergency, Number of doctors was around 100 but May was 110
+Emergency, Number of attendaces on a gradual increase in the past 4 months but not conclusive trend
+Emergency, % admitted as inpatients is in the low 40s
+Emergency, Reattendance rate has increased to above 3%
+Emergency, P2 wait time is around 25%
+Emergency, Door to Balloon time is still high at around 70-80 minutes, above the 60 minutes target
+Emergency, Door to Needle time is below 60 minutes, achieving the target
+Inpatient, Number of beds is constant for the past 4 months
+Inpatient, Number of discharges on the rise in the past 4 months
+Inpatient, % discharge as Electives fluctuates around 8%
+Inpatient, More discharges to Community Hospital
+Inpatient, Experienced higher BOR in May​ at 98%
+Inpatient, Experienced higher bed wait time in May​ at 7 hours
+Inpatient, ALOS around 8 days
+Inpatient, MIC@ home around 20 days
+Surgery & Scope, Saw an increase in Inpatient in the past 4 months, peaking in May at 2500+
+Surgery & Scope, Saw an increase in Day Surgeries​ in the past 4 months, peaking in May at 6700
+Surgery & Scope, Number of Scopes is around 1500​
+Surgery & Scope, Time for Hip fracture surgery saw a new low​ in May
+Community Hospital, Number of beds increased to 220
+Community Hospital, Number of discharges increased from ~180 to 200+
+Community Hospital, Inpatient to Community Hospital average transfer wait time is low at around 1 day
+Community Hospital, ALOS fuctuates between 20-30 days
+Community Hospital, BOR fuctuates between 70-85%

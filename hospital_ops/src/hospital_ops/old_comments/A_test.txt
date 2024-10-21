@@ -1,0 +1,9 @@
+Gold Standard Comment | Similar Generated Comment | Score
+---|---|---
+Saw a slight decrease in RV:FV ratio | Ratio of Repeat Visits to First Visits: This ratio is showing a decreasing trend with a Last-4-Month slope of -0.10, suggesting an improvement in patient care efficiency as fewer repeat visits are needed relative to first visits. | 1
+FV appt wait time is ~40 days | Waiting time to get First Visit Appointment (Median days): The median wait time has shown variability with a slight increase, currently above the target of 14 days as per [TARGETS], suggesting room for improvement in reducing wait times. | 0.5
+Experienced higher BOR and bed wait time in May | Waiting time (hours) - Median: Recent months show variability, suggesting a need to address factors contributing to longer wait times. | 0.5
+More discharges to CH | % of discharges transferred to Community Hospital: Shows variability but no significant trend, indicating stable transfer practices. | 0.5
+Saw an increase in Inpatient and Day Surgeries | Inpatient Surgeries: A positive trend in surgeries indicates increased surgical capacity or demand. Day Surgeries: An increasing trend suggests improved capacity for non-inpatient procedures. | 1
+Time for Hip fracture surgery saw a new low | Average Hip Fracture to Surgery time (hours): Although decreasing, it still exceeds the target of 48 hours, necessitating quicker surgical response times. | 0.5
+Total Score | | 4/6

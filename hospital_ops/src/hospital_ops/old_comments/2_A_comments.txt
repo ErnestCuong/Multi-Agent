@@ -1,0 +1,40 @@
+Hospital 'A' Analysis
+
+Outpatient Service
+1. Rooms: Stable trend with no changes in the number of rooms.
+2. Attendances (exclude Dental): Increase might be random noise; high attendance could signal capacity strains.
+3. Ratio of Repeat Visits to First Visits: Decrease suggests improvements in care effectiveness.
+4. Median First Visit Appointment Wait Time: Concerning trend of longer wait times, above target.
+5. 95th Percentile First Visit Appointment Wait Time: Positive trend, moving towards target.
+
+Emergency Service
+6. ED Doctors: Stable staffing levels.
+7. Total ED Attendances: Decrease may be random noise; could be positive if due to improved care.
+8. % Admitted as Inpatients: Stable admission rate.
+9. Re-attendance rate within 30 days: Upward trend suggests potential issues in treatment effectiveness.
+10. Priority 2 wait time to see ED doctor: Positive trend towards target.
+11. Average Door to Balloon time for AMI patients: No significant change; ensure it remains below target.
+12. Average Door to Needle time: Potential improvement but requires confirmation.
+
+Inpatient Service
+13. Beds: Decrease suggests strategic shifts in care.
+14. Discharges: Stable numbers.
+15. % of discharges as Electives: Progress towards target.
+16. % of discharges transferred to Community Hospital: Stable trend.
+17. ALOS: Trend towards shorter stays.
+18. Waiting time - Median: Stable wait times.
+19. BOR: Stable occupancy rate.
+20. Medical Home cases: Fluctuations, but overall increase aligns with strategic goals.
+
+Surgery & Scope
+21. Inpatient Surgeries: Positive growth suggests improved capacity.
+22. Day Surgeries: Significant increase indicates efficiency improvements.
+23. Scopes: Stable use.
+24. Average Hip Fracture to Surgery time: Potential improvement; must continue towards target.
+
+Community Hospital
+25. Beds: Expansion suggests strategic growth.
+26. Discharges: Significant increase indicates enhanced capacity.
+27. Inpatient to Community Hospital transfer time: Stable times.
+28. ALOS: Shorter stays align with efficiency goals.
+29. BOR: Downward trend could reflect increased efficiency.

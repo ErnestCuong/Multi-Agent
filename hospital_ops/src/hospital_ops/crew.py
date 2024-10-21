@@ -45,24 +45,24 @@ class HospitalOpsCrew():
 	# 		verbose=True
 	# 	)
 
-	# @task
-	# def exploring_hospital_data_task(self) -> Task:
-	# 	return Task(
-	# 		config=self.tasks_config['exploring_hospital_data_task'],
-	# 		# tools=[list_hospitals_tool, get_hospital_path_tool, fetch_and_observation_tool]
-	# 	)
-  
-	# @task
-	# def analysing_hospital_operations_task(self) -> Task:
-	# 	return Task(
-	# 		config=self.tasks_config['analysing_hospital_operations_task'],
-	# 	)
+	@task
+	def exploring_hospital_data_task(self) -> Task:
+		return Task(
+			config=self.tasks_config['exploring_hospital_data_task'],
+			# tools=[list_hospitals_tool, get_hospital_path_tool, fetch_and_observation_tool]
+		)
   
 	@task
-	def verify_hospital_comments(self) -> Task:
+	def analysing_hospital_operations_task(self) -> Task:
 		return Task(
-			config=self.tasks_config['verify_hospital_comments'],
+			config=self.tasks_config['analysing_hospital_operations_task'],
 		)
+  
+	# @task
+	# def verify_hospital_comments(self) -> Task:
+	# 	return Task(
+	# 		config=self.tasks_config['verify_hospital_comments'],
+	# 	)
 
 	@crew
 	def crew(self) -> Crew:
@@ -72,5 +72,6 @@ class HospitalOpsCrew():
 			tasks=self.tasks, # Automatically created by the @task decorator
 			process=Process.sequential,
 			verbose=True,
+			cache=False,
 			# process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
 		)

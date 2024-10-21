@@ -60,8 +60,8 @@ def fetch_and_observation_tool(path: str):
     # List of month names (column names)
     months = df_filtered.columns.tolist()[-num_of_months:]
 
-    # new_df = df[non_use_columns]
-    new_df = df
+    new_df = df[non_use_columns]
+    # new_df = df
 
     # Iterate through each row and calculate slope and R-squared
     results = []
@@ -97,22 +97,39 @@ def fetch_and_observation_tool(path: str):
         # Analyze against hospital targets
         goal_analysis = get_goal_analysis(months, y_clean, target_pair)
 
+        # Calculate the mean
+        mean = np.mean(y_clean)
+        
+        # Check if last month value is min or max
+        last_month_observation = ""
+        if (y_clean[-1] == np.min(y_clean) and np.sum(y_clean == y_clean[-1]) == 1):
+            last_month_observation = f"Dip in {months[-1]}"
+        if (y_clean[-1] == np.max(y_clean) and np.sum(y_clean == y_clean[-1]) == 1):
+            last_month_observation = f"Rose in {months[-1]}"
+            
         # Store the results for the current row
         results.append(
             {
                 f"Last-{num_of_months}-Month Slope": slope,
                 f"Last-{num_of_months}-Month R-squared": r_squared,
                 f"Last-{num_of_months}-Month Target Analysis": goal_analysis,
+                f"Last-{num_of_months}-Month Mean": mean,
+                f"Last Month Observation": last_month_observation,
             }
         )
 
-    new_df[f"Last-{num_of_months}-Month Slope"] = [
-        item[f"Last-{num_of_months}-Month Slope"] for item in results
-    ]
+    new_df[f"Last Month Observation"] = [item[f"Last Month Observation"] for item in results]
+
     new_df[f"Last-{num_of_months}-Month R-squared"] = [
         item[f"Last-{num_of_months}-Month R-squared"] for item in results
     ]
+    
+    new_df[f"Last-{num_of_months}-Month Slope"] = [
+        item[f"Last-{num_of_months}-Month Slope"] for item in results
+    ]
+
     new_df[f"Last-{num_of_months}-Month Target Analysis"] = [item[f"Last-{num_of_months}-Month Target Analysis"] for item in results]
+    new_df[f"Last-{num_of_months}-Month Mean"] = [item[f"Last-{num_of_months}-Month Mean"] for item in results]
 
     # Step 4: Analyse last 6 months
     num_of_months = 6
@@ -150,7 +167,7 @@ def fetch_and_observation_tool(path: str):
 
         # Calculate R-squared
         r_squared = round(model.score(X_clean, y_clean),2)
-
+        
         # Store the results for the current row
         results.append(
             {
@@ -159,12 +176,14 @@ def fetch_and_observation_tool(path: str):
             }
         )
 
-    new_df[f"Last-{num_of_months}-Month Slope"] = [
-        item[f"{num_of_months}-Month Slope"] for item in results
-    ]
     new_df[f"Last-{num_of_months}-Month R-squared"] = [
         item[f"{num_of_months}-Month R-squared"] for item in results
     ]
+    
+    new_df[f"Last-{num_of_months}-Month Slope"] = [
+        item[f"{num_of_months}-Month Slope"] for item in results
+    ]
+
 
     # Save the report
     new_df.to_csv(

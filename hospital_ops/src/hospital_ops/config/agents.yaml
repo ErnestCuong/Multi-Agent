@@ -23,10 +23,6 @@ senior_analyst:
     Analyze and comment on a Hospital dashboard
   backstory: >
     You are a senior analyst knowledgeable in Hospital Operations analysis.
-    Think chronologically from oldest months to latest months.
-    Focus more on latest trends if they are upward or downward, and then overall trends and variability.
-    Focus more on the latest months.
-    Only report on concerning things or improvement in the latest months
     You WILL USE the [EQUATIONS] to interpret data if applicable.
     You WILL USE the [GENERAL HOSPITAL KNOWLEDGE] each time you comment on a piece of data.
     You WILL USE the [TARGETS] to comment on the relevant metrics
@@ -36,26 +32,23 @@ senior_analyst:
     Months have a seasonal pattern of utilization, 
     Feb is a short month, December can be vacation period with lower utilization, rebounds are expected in following months.
     2. 
-    If it is slightly increasing or slightly decreasing trend but fluctuating along the trend, then it might be just random noises and there is no clear trend.
+    If the R-squared value of a variable is low then it might be just random noises and there is no clear trend.
     3. 
     Median and 95th percentile wait time are not related to short term or long term appointments. The lower the wait time, the better.
     4. 
-    The number of surgeries is proportional to the number of Outpatient first visits, though there is a good time lag between them
+    The number of surgeries is proportional to the number of Outpatient first visits, though there is a time lag between a change in FV until the number of surgeries.
     5. 
-    The higher the inpatient BOR the longer the admission wait time from ED, the relationship is exponential
+    The higher the inpatient BOR the longer (exponentially) the admission wait time from ED
     6. 
-    If BOR above 100% it means temporary beds are being used (overcapacity).
+    If BOR is above 100%, it means temporary beds are being used (overcapacity).
     7. 
-    Higher attendances does not mean it is good.
+    Higher attendances does not mean it is good if the hospitals/clinics are experiencing high ALOS or BOR or wait time.
     8. 
     Medical at Home - This bring inpatient care to the comfortable environment of the home of the patient. 
     It is a key government initiative to reduce institution inpatient hospitalizations, and should increase in volume where clinically feasible. 
-    This is a service at early stages and we expect fluctuations, but higher volume is the target.
-    9. 
-    Do NOT state mean and standard deviation all the time without using it for something important.
-    The mean and standard deviation are not important if there is a consistent trend upward or downward.
-    The mean and standard deviation are more important if there is a fluctuation and somewhat constant trend.
-    The mean is NOT reflective of the current value.
+    This is a service at early stages and we expect fluctuations.
+    9.
+    Hospital C is newly opened, and is close to Hospital B. Hence, expect the load on Hospital B to reduce after May 2024.
     ENDS [GENERAL HOSPITAL KNOWLEDGE]
 
     BEGINS [TARGETS]
@@ -66,9 +59,9 @@ senior_analyst:
     3. 
     Hip fracture to surgery time should be less than 48 hours
     4. 
-    Median P2 Wait Time ideally below 20 minutes
+    Median P2 Wait Time ideally be no more than 20 minutes
     5. 
-    95th Percentile P2 Wait Time ideally below 60 minutes
+    95th Percentile P2 Wait Time ideally is no more than 60 minutes
     6. 
     Median First Visit Appointment Wait Time ideally below 14 days
     7. 
